@@ -81,4 +81,24 @@ class StripeServiceTest {
         assertThat(cardPaymentCharge).isNotNull();
         assertThat(cardPaymentCharge.isCardDebited()).isTrue();
     }
+
+    @Test
+    void itShouldNotChargeWhenApiThrowsException() throws StripeException {
+        // Given
+        String cardSource = "0x0x0x";
+        BigDecimal amount = new BigDecimal("10.00");
+        Currency currency = Currency.USD;
+        String description = "Donation";
+
+        // Throw exception when stripe api is called
+        StripeException stripeException = mock(StripeException.class);
+        doThrow(stripeException).when(stripeApi).create(anyMap(), any());
+
+        // When
+        // Then
+        assertThatThrownBy(() -> underTest.chargeCard(cardSource, amount, currency, description))
+                .isInstanceOf(IllegalStateException.class)
+                .hasRootCause(stripeException)
+                .hasMessageContaining("Cannot make stripe charge");
+    }
 }

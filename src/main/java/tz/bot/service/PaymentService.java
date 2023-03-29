@@ -29,7 +29,7 @@ public class PaymentService {
         this.cardPaymentCharger = cardPaymentCharger;
     }
 
-    void chargeCard(UUID customerId, PaymentRequest paymentRequest){
+    public void chargeCard(UUID customerId, PaymentRequest paymentRequest){
 //        1. Does customer exist, if not throw an exception
         boolean isCustomerFound=customerRepository.findById(customerId).isPresent();
         if(!isCustomerFound){
