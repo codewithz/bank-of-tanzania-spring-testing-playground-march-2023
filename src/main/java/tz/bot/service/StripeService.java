@@ -18,15 +18,17 @@ public class StripeService implements CardPaymentCharger {
 
     private final StripeApi stripeApi;
 
+    @Autowired
+    public StripeService(StripeApi stripeApi) {
+        this.stripeApi = stripeApi;
+    }
+
     private final static RequestOptions requestOptions =RequestOptions
             .builder()
             .setApiKey("sk_test_51MquS1SICls1H3gzXPQXgGKdf6xjvtkzsHNyNhSyMteua1i7cgKWYUuKjFa4CpajRglnBvU8WC9X6Xm6Yb2MTek300OiFLWT9M")
             .build();
 
-    @Autowired
-    public StripeService(StripeApi stripeApi) {
-        this.stripeApi = stripeApi;
-    }
+
 
     @Override
     public CardPaymentCharge chargeCard(
