@@ -25,6 +25,7 @@ public class CustomerRegistrationController {
     public void registerNewCustomer
             (@Valid @RequestBody CustomerRegistrationRequest customerRegistrationRequest){
         customerRegistrationService.registerNewCustomer(customerRegistrationRequest);
+        System.out.println("---- Customer Controller-----");
     }
 
 }

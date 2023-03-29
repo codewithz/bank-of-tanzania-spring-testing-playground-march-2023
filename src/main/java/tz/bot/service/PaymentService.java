@@ -31,6 +31,8 @@ public class PaymentService {
 
     public void chargeCard(UUID customerId, PaymentRequest paymentRequest){
 //        1. Does customer exist, if not throw an exception
+        System.out.println("---- Customer ID in ChargeCard:"+customerId+"--------------------");
+        System.out.println(customerRepository.findById(customerId));
         boolean isCustomerFound=customerRepository.findById(customerId).isPresent();
         if(!isCustomerFound){
             throw new IllegalStateException(

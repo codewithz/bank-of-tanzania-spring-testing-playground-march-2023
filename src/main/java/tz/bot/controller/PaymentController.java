@@ -20,5 +20,6 @@ public class PaymentController {
     @ResponseStatus(HttpStatus.CREATED)
     public void makePayment(@RequestBody PaymentRequest paymentRequest){
         paymentService.chargeCard(paymentRequest.getPayment().getCustomerId(),paymentRequest);
+
     }
 }
