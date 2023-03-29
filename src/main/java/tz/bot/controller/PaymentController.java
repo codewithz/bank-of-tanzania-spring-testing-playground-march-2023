@@ -1,9 +1,8 @@
 package tz.bot.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 import tz.bot.model.PaymentRequest;
 import tz.bot.service.PaymentService;
 
@@ -17,7 +16,8 @@ public class PaymentController {
     public PaymentController(PaymentService paymentService) {
         this.paymentService = paymentService;
     }
-    @RequestMapping("/payment")
+    @PostMapping ("/payment")
+    @ResponseStatus(HttpStatus.CREATED)
     public void makePayment(@RequestBody PaymentRequest paymentRequest){
         paymentService.chargeCard(paymentRequest.getPayment().getCustomerId(),paymentRequest);
     }
